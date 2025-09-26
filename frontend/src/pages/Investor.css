@@ -1,142 +1,466 @@
 .investor-container {
     display: flex;
     height: 100vh;
-    background-color: #f2ebeb; /* arka plan koyu */
+    background-color: #fff;
     font-family: 'Arial', sans-serif;
     color: #070707;
-  }
-  
-  /* Sol panel */
-  .liked-projects {
+    overflow: hidden;
+}
+
+.sidebar {
     width: 20%;
     background-color: #fff;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-  }
-  
-  .wallet-box {
-    background-color: #f5d742;
-    border-radius: 20px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: bold;
-    color: #000;
-    font-size: 14px;
-    width: fit-content;
-  }
-  
-  /* Ortadaki kart */
-  .main-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .project-card {
-    display: flex;
-    flex-direction: row;
-    background-color: #fff9e6;
-    border-radius: 20px;
-    width: 600px;
-    height: 400px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    overflow: hidden;
-    position: relative;
-  }
-  
-  /* Sol taraf - logo */
-  .project-card-left {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .project-card-left img {
-    max-width: 150px;
-    max-height: 150px;
-  }
-  
-  /* Sağ taraf - bilgiler */
-  .project-card-right {
-    flex: 1;
+    border-right: 1px solid #fff;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    border-right: 2px solid #9E9B9B ;
+}
+
+.user-address {
+    background-color: #f5d742;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+    text-align: center;
+    user-select: all;
+    font-size: 14px;
+}
+
+.project-list {
+
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.project-list li {
+    margin-top: 60px;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
+
+.project-list li:hover,
+.project-list li.active-project {
+    background-color: #efeee8;
+    font-weight: bold;
+    color: #000;
+}
+
+.empty-liked {
+    color: #aaa;
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.liked-projects {
+    margin-top: 10px;
+}
+
+.liked-projects h3 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.clear-liked {
+    background-color: #FADC61;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 12px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.sidebar-bottom-logo {
+    display: flex;
     justify-content: center;
-  }
-  
-  .project-card-right h2 {
-    margin: 0;
+    padding-top: 20px;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.project-card {
+    display: flex;
+    background-color: #FDF7D9 ;
+    border-radius: 20px;
+    width: 80%;
+    /* ekranın %80'i kadar */
+    max-width: 1000px;
+    /* çok büyümesin */
+    height: 70vh;
+    /* ekranın %70 yüksekliği */
+    max-height: 650px;
+    /* maksimum yükseklik sınırı */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    position: relative;
+    transition: filter 0.3s ease;
+}
+
+.project-card-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FDF7D9 ;
+    border-right: 2px solid black;
+}
+
+.project-card-left img {
+
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* resim kırpılmadan görünür */
+
+}
+
+.project-card-right {
+    flex: 1;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.logo-text h2 {
+    margin: 5px 0 0 0;
     font-size: 28px;
     font-weight: bold;
     color: #000;
-  }
-  
-  .project-card-right .subtitle {
+}
+
+.category {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.subtitle {
     font-size: 14px;
     color: #777;
-    margin-bottom: 20px;
-  }
-  
-  .metrics-box {
+    margin-top: 4px;
+}
+
+.project-metrics {
+    background: #fff;
     border: 1px solid #f0e0a0;
     border-radius: 10px;
-    background: #fff;
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     font-size: 14px;
-  }
-  
-  .metrics-box div {
+    color: #333;
+    width: 240px;
+}
+
+.project-metrics div {
     text-align: center;
-  }
-  
-  .metrics-box span {
-    display: block;
+}
+
+.metric-label {
+    text-transform: lowercase;
+    font-weight: 600;
+    color: #999;
+}
+
+.metric-value {
     font-weight: bold;
     margin-top: 4px;
-  }
-  
-  /* Butonlar - alt kısım */
-  .buttons {
+}
+
+.project-details {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 60px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Butonlar */
+.buttons,
+.investment-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    gap: 40px;
-  }
-  
-  .action-button {
-    width: 70px;
-    height: 70px;
+}
+
+.action-button,
+.skip-button,
+.like-button,
+.confirm-button,
+.amount-button {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: 2px solid #000;
     background: transparent;
     cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+.skip-button {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.skip-button:hover {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.like-button {
+    border-color: #FADC61;
+    color: #000;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.like-button:hover {
+    background-color: #FADC61;
+    color: #000;
+}
+
+.confirm-button {
+    border-color: #2ecc71;
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.confirm-button:disabled {
+    border-color: #ccc;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.confirm-button:hover:enabled {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+/* Yatırım seçenekleri */
+.investment-selection {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FADC61;
+    border-radius: 20px;
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    width: 320px;
+    border: 3px solid black;
+}
+
+.investment-modal {
+    background: #FADC61;
+    border-radius: 18px;
+    padding: 18px;
+    width: 320px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    z-index: 110;
+    /* overlay üstünde içeriğin net görünmesi için */
+}
+
+.amount-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+.amount-button {
+    background: #fff;
+    border-radius: 12px;
+    width: 70px;
+    height: 45px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.amount-button.selected,
+.amount-button:hover {
+    background-color: #FADC61;
+    border: 2px solid #000;
+    font-weight: bolder;
+}
+
+.other-amount-input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    outline: none;
+}
+
+/* Yatırım yapıldı mesajı */
+.investment-done {
+    position: fixed;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FADC61;
+    border-radius: 20px;
+    padding: 16px 28px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+}
+
+.checkmark {
+    color: #2ecc71;
+    font-size: 30px;
+}
+
+.done-buttons {
+    margin-left: 30px;
+}
+
+.done-buttons button {
+    background: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 15px;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.done-buttons button:hover {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* Blur effect for right side after investment */
+.project-card.blurred-card {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    /* top:0;right:0;bottom:0;left:0; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    /* card üzeri */
+    /* yarı saydam arka plan + blur */
+    background: rgba(0, 0, 0, 0.18);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+.card-logo-container {
+    position: absolute;
+    top: 50px; /* logoyu kartın üstüne taşır */
+    left: 60%;
+    transform: translateX(-50%);
+    z-index: 10; /* kartın üstünde görünmesi için */
+  }
+  
+  .card-top-logo {
+    width: 120px; /* ihtiyacına göre boyut */
+    height: auto;
   }
 
-  .skip-button:hover{
-    background-color: #e74c3c;
-  }
-  
-  .like-button:hover {
-    background-color: #2ecc71;
-  }
-  
-  .skip-button {
-    border-color: #e74c3c;
-  }
-  
-  .like-button {
-    border-color: #2ecc71;
-  }
+  .project-details-container {
+    position: absolute;
+    bottom: -100%; /* alt panel gizli */
+    left: 0;
+    width: 100%;
+    height: 40%; /* istediğin yüksekliği ver */
+    background-color: #fff;
+    padding: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.2);
+    transition: bottom 0.5s ease;
+    overflow-y: auto;
+}
+
+/* Detay paneli açılınca */
+.project-card.show-details .project-details-container {
+    bottom: 0;
+}
+
+/* Scrollbar isteğe bağlı */
+.project-details-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.project-details-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
