@@ -1,0 +1,142 @@
+.investor-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f2ebeb; /* arka plan koyu */
+    font-family: 'Arial', sans-serif;
+    color: #070707;
+  }
+  
+  /* Sol panel */
+  .liked-projects {
+    width: 20%;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+  
+  .wallet-box {
+    background-color: #f5d742;
+    border-radius: 20px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #000;
+    font-size: 14px;
+    width: fit-content;
+  }
+  
+  /* Ortadaki kart */
+  .main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .project-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff9e6;
+    border-radius: 20px;
+    width: 600px;
+    height: 400px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Sol taraf - logo */
+  .project-card-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .project-card-left img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+  
+  /* Sağ taraf - bilgiler */
+  .project-card-right {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .project-card-right h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .project-card-right .subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .metrics-box {
+    border: 1px solid #f0e0a0;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    font-size: 14px;
+  }
+  
+  .metrics-box div {
+    text-align: center;
+  }
+  
+  .metrics-box span {
+    display: block;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+  
+  /* Butonlar - alt kısım */
+  .buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+  }
+  
+  .action-button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .skip-button:hover{
+    background-color: #e74c3c;
+  }
+  
+  .like-button:hover {
+    background-color: #2ecc71;
+  }
+  
+  .skip-button {
+    border-color: #e74c3c;
+  }
+  
+  .like-button {
+    border-color: #2ecc71;
+  }
