@@ -51,47 +51,56 @@ body{
 .nav-right{ display:flex; justify-content:flex-end }
 
 /* ================= HERO ================= */
-.hero{
-  background:var(--yellow);
-  padding: clamp(16px, 3vw, 28px) 0 clamp(40px, 6vw, 68px);
+.hero {
+  background: var(--yellow);
+  width: 100%;             /* sayfa kadar genişlik */
+  margin: 0;               /* ortalamayı kaldır */
+  padding: 0 0 60px 0;     /* üst/alt boşluk bırakabilirsin */
 }
-.hero-inner{
-  width:100%;
-  margin:0 auto;
-  max-width:1200px;                   /* geniş ekranlarda taşma yok */
-  display:flex;
-  align-items:flex-end;
-  justify-content:flex-start;         /* sağa kaçmayı engelle */
-  gap:clamp(16px, 4vw, 48px);
+
+.hero-inner {
+  width: 100%;             /* sayfanın tamamını kapla */
+  display: flex;
+  justify-content: flex-start;  /* sol logo + sağ kartlar */
+  align-items: flex-end;
+  gap: 40px;
 }
 
 /* Sol: Logo + blazr tamamen sola yapışık */
-.hero-brand{
-  display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;
-  margin-left:0;
+.hero-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* sola yapış */
+  justify-content: flex-start;
+  margin-left: 0;           /* boşluğu kaldır */
 }
-.hero-logo{
-  padding-left:0;
-  width: clamp(140px, 18vw, 320px);   /* responsive */
-  height:auto;
-  margin-bottom: clamp(-24px, -2vw, -12px);
+
+.hero-logo {
+  width: clamp(400px, 18vw, 280px);
+  height: auto;
+  margin: 0 0 -70px 0;      /* yazıya yaklaş */
 }
-.brand-giant{
-  padding:0;
-  font-size: clamp(120px, 12vw, 320px);   /* 500px çok büyüktü */
-  line-height: .85;
-  font-weight:900;
-  color:#2a2a2a;
-  opacity:.25;
-  user-select:none; pointer-events:none;
+
+.brand-giant {
+  font-size: clamp(500px, 12vw, 300px);
+  line-height: 0.9;
+  font-weight: 900;
+  color: #2a2a2a;
+  opacity: 0.75;
+  margin-left: 30px;                /* sola yapış */
+  padding: 0;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* Sağ: İKİ KART – animasyonlu yer değiştirme */
-.card-stack.v2{
-  position:relative;
-  width: clamp(280px, 32vw, 500px);
-  height: clamp(320px, 42vw, 580px);
-  margin: 0 clamp(8px, 2vw, 16px) clamp(8px, 3vw, 25px) 0; /* üst/sağ/alt/sol */
+.card-stack.v2 {
+  position: relative;
+  width: 420px;   /* 🔹 daha dar, ekran genişliğine göre */
+  height: 560px;  /* 🔹 yükseklik de responsive */
+  margin-bottom: 25px;
+  margin-right: 0;                    /* 🔹 sağ boşluk yok */
+  margin-left: 30px;                  /* 🔹 istersen biraz sola kaydır */
 }
 
 /* Ortak kart */
