@@ -1,0 +1,36 @@
+.defly-connected-box {
+    background: #fadc61;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    min-width: 170px;
+  }
+  
+  .defly-address {
+    font-weight: bold;
+    font-size: 19px;
+    color: #222;
+  }
+  
+  .defly-connected-box b {
+    font-size: 10px;
+    color: #2ecc71;
+  }
+  
+  .defly-disconnect-btn {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .wallet{
+    height:36px; padding:0 14px; border-radius:999px;
+    border:none; background:#0f0f0f; color:#fff; font-weight:700;
+    box-shadow:var(--shadow); cursor:pointer;
+  }

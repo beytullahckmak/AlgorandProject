@@ -5,6 +5,8 @@ import algoLogo from "../assets/algorand_logo_mark_black.svg";
 import Logo from "../assets/loog.png";
 import crazy from "../assets/crazy.png"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // 🔹 soft görünümlü font-awesome oklar
+import DeflyConnect from "../DeflyConnect";
+
 
 
 const HomePage = () => {
@@ -25,7 +27,7 @@ const HomePage = () => {
           <a className="pill" href="/investor">algoinvest</a>
         </nav>
         <div className="nav-right">
-          <button className="wallet">connect wallet</button>
+          <DeflyConnect />
         </div>
       </header>
 
@@ -72,10 +74,10 @@ const HomePage = () => {
               </p>
               <div className="arrow-row">
                 <button className="arrow-btn" onClick={handleSwap}>
-                   <FaArrowLeft />
+                  <FaArrowLeft />
                 </button>
                 <button className="arrow-btn" onClick={handleSwap}>
-                  <FaArrowRight/>
+                  <FaArrowRight />
                 </button>
               </div>
             </div>
@@ -84,40 +86,40 @@ const HomePage = () => {
       </section>
 
       {/* Alt içerik (aynı) */}
-    <section id="howto" className="content howto">
-  <div className="content-left">
-    <h1>Fast Swipes, Smart Gains.</h1>
-    <p>
-      BLAZR is a swipe-to-invest DeFi app running on Algorand.
-      Built on Algorand’s instant finality and low fees, it lets you
-      invest with a single swipe.
-    </p>
-    <button className="docs-btn">go docs</button>
-  </div>
-
-  <div className="content-right">
-    {/* sağ tarafta stacked kartlar */}
-    <div className="howto-cards">
-      {/* en öndeki sarımsı kart */}
-      <div className="hc hc-top">
-        <div className="hc-thumb">
-          <img src={algoLogo} alt="algorand" />
+      <section id="howto" className="content howto">
+        <div className="content-left">
+          <h1>Fast Swipes, Smart Gains.</h1>
+          <p>
+            BLAZR is a swipe-to-invest DeFi app running on Algorand.
+            Built on Algorand’s instant finality and low fees, it lets you
+            invest with a single swipe.
+          </p>
+          <button className="docs-btn">go docs</button>
         </div>
-        <span className="hc-tag">defi</span>
-      </div>
 
-      {/* ortadaki gri kart */}
-      <div className="hc hc-mid">
-        <span className="hc-tag">gamefi</span>
-      </div>
+        <div className="content-right">
+          {/* sağ tarafta stacked kartlar */}
+          <div className="howto-cards">
+            {/* en öndeki sarımsı kart */}
+            <div className="hc hc-top">
+              <div className="hc-thumb">
+                <img src={algoLogo} alt="algorand" />
+              </div>
+              <span className="hc-tag">defi</span>
+            </div>
 
-      {/* en arkadaki koyu gri kart */}
-      <div className="hc hc-back">
-        <span className="hc-tag">meme</span>
-      </div>
-    </div>
-  </div>
-</section>
+            {/* ortadaki gri kart */}
+            <div className="hc hc-mid">
+              <span className="hc-tag">gamefi</span>
+            </div>
+
+            {/* en arkadaki koyu gri kart */}
+            <div className="hc hc-back">
+              <span className="hc-tag">meme</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </div>
   );

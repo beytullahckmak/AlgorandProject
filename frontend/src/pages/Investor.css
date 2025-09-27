@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 2px solid #9E9B9B ;
+    border-right: 2px solid #9E9B9B;
 }
 
 .user-address {
@@ -31,16 +31,15 @@
 }
 
 .project-list {
-
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 40px 0 20px 0;
     flex-grow: 1;
     overflow-y: auto;
 }
 
 .project-list li {
-    margin-top: 60px;
+    margin-top: 15px;
     padding: 8px 10px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
@@ -100,7 +99,7 @@
 
 .project-card {
     display: flex;
-    background-color: #FDF7D9 ;
+    background-color: #FDF7D9;
     border-radius: 20px;
     width: 80%;
     /* ekranın %80'i kadar */
@@ -114,6 +113,30 @@
     overflow: hidden;
     position: relative;
     transition: filter 0.3s ease;
+    align-items: stretch;
+    /* flex itemların yüksekliği eşit olsun */
+    overflow: visible;
+}
+
+.project-card2 {
+    display: flex;
+    background-color: #e48383;
+    border-radius: 20px;
+    width: 80%;
+    /* ekranın %80'i kadar */
+    max-width: 1000px;
+    /* çok büyümesin */
+    height: 70vh;
+    /* ekranın %70 yüksekliği */
+    max-height: 650px;
+    /* maksimum yükseklik sınırı */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    position: relative;
+    transition: filter 0.3s ease;
+    align-items: stretch;
+    /* flex itemların yüksekliği eşit olsun */
+    overflow: visible;
 }
 
 .project-card-left {
@@ -121,8 +144,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #FDF7D9 ;
+    background: #FDF7D9;
     border-right: 2px solid black;
+    height: 100%;
+}
+
+.project-card-left2 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e48383;
+    border-right: 2px solid black;
+    height: 100%;
 }
 
 .project-card-left img {
@@ -141,6 +175,17 @@
     flex-direction: column;
     justify-content: start;
     position: relative;
+    height: 100%;
+}
+
+.project-card-right2 {
+    flex: 1;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    position: relative;
+    height: 100%;
 }
 
 .header {
@@ -171,16 +216,18 @@
 }
 
 .subtitle {
+    width: 100%;
     font-size: 14px;
     color: #777;
     margin-top: 4px;
+    justify-content: center;
 }
 
 .project-metrics {
     background: #fff;
     border: 1px solid #f0e0a0;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
@@ -205,6 +252,15 @@
 }
 
 .project-details {
+    font-size: 25px;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 60px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.project-details2 {
     font-size: 14px;
     line-height: 1.4;
     color: #333;
@@ -214,7 +270,6 @@
 }
 
 /* Butonlar */
-.buttons,
 .investment-buttons {
     display: flex;
     justify-content: center;
@@ -225,24 +280,35 @@
     transform: translateX(-50%);
 }
 
-.action-button,
+.buttons {
+    position: absolute;
+    top: 85%;
+    /* kartın tam altına */
+    left: 60%;
+    transform: translate(-50%, -40%);
+    /* biraz yukarı çek */
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    z-index: 50;
+    /* kartın üstünde olsun */
+}
+
 .skip-button,
 .like-button,
-.confirm-button,
-.amount-button {
-    width: 60px;
-    height: 60px;
+.confirm-button {
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    border: 2px solid #000;
-    background: transparent;
+    border: 3px solid #000;
+    background: #fff;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 28px;
     line-height: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s ease;
-    user-select: none;
+    transition: all 0.3s ease;
 }
 
 .skip-button {
@@ -274,11 +340,6 @@
     font-weight: bold;
 }
 
-.confirm-button:disabled {
-    border-color: #ccc;
-    color: #ccc;
-    cursor: not-allowed;
-}
 
 .confirm-button:hover:enabled {
     background-color: #2ecc71;
@@ -424,43 +485,195 @@
 
 .card-logo-container {
     position: absolute;
-    top: 50px; /* logoyu kartın üstüne taşır */
-    left: 60%;
+    top: -110px;
+    /* logoyu kartın üstüne taşır */
+    left: 45%;
     transform: translateX(-50%);
-    z-index: 10; /* kartın üstünde görünmesi için */
-  }
-  
-  .card-top-logo {
-    width: 120px; /* ihtiyacına göre boyut */
+    z-index: 10;
+    /* kartın üstünde görünmesi için */
+}
+
+.card-top-logo {
+    width: 120px;
+    /* ihtiyacına göre boyut */
     height: auto;
-  }
+}
 
-  .project-details-container {
-    position: absolute;
-    bottom: -100%; /* alt panel gizli */
-    left: 0;
-    width: 100%;
-    height: 40%; /* istediğin yüksekliği ver */
-    background-color: #fff;
+/* ... mevcut css devam ... */
+
+/* Detay modu için kartın tamamını kapla */
+.project-card.detail-mode {
+    width: 80% !important;
+    max-width: 1000px;
+    height: 80vh !important;
+    max-height: none !important;
+    border-radius: 20px;
+    background-color: #FDF7D9;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 -4px 16px rgba(0,0,0,0.2);
-    transition: bottom 0.5s ease;
+    overflow: visible;
+}
+
+/* Detay modundayken sadece detay kısmı gösterilecek */
+.project-card.detail-mode .project-card-left,
+.project-card.detail-mode .project-card-right {
+    display: none;
+}
+
+/* Detay kısmı fullscreen gibi */
+.project-details.full-detail {
+    flex: 1;
     overflow-y: auto;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    padding-right: 15px;
+    user-select: text;
+    position: relative;
 }
 
-/* Detay paneli açılınca */
-.project-card.show-details .project-details-container {
-    bottom: 0;
+.project-details2.full-detail2 {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    padding-right: 15px;
+    user-select: text;
+    position: relative;
 }
 
-/* Scrollbar isteğe bağlı */
-.project-details-container::-webkit-scrollbar {
+/* Kapat butonu */
+.close-detail-btn {
+    position: sticky;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FADC61;
+    border: 2px solid #000;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    width: fit-content;
+}
+
+/* Scroll bar stil opsiyonel */
+.project-details.full-detail::-webkit-scrollbar {
     width: 6px;
 }
 
-.project-details-container::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+.project-details.full-detail::-webkit-scrollbar-thumb {
+    background-color: #FADC61;
     border-radius: 3px;
+}
+
+.project-details2.full-detail2::-webkit-scrollbar {
+    width: 6px;
+}
+
+.project-details2.full-detail2::-webkit-scrollbar-thumb {
+    background-color: #FADC61;
+    border-radius: 3px;
+}
+
+/* Proje detayının scroll alanı normal modda */
+.project-card-right .project-details {
+    overflow-y: auto;
+    margin-top: 50px;
+    padding-right: 8px;
+    user-select: text;
+    flex-grow: 1;
+}
+
+/* Scroll bar stil opsiyonel */
+.project-card-right .project-details::-webkit-scrollbar {
+    width: 5px;
+}
+
+.project-card-right .project-details::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 2.5px;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    height: 120px;
+    /* istediğin yükseklik */
+    margin-bottom: 10px;
+}
+
+.project-title-right {
+    text-align: right;
+    width: 100%;
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+    /* dikey ortalansın diye */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+}
+
+/* TOPIC KISMI */
+.project-topic {
+    text-align: center;
+    font-size: 18px;
+    margin: 40px auto 0 auto;
+    width: 90%;
+    color: #222;
+    font-weight: 500;
+}
+
+/* METRICS ORTALI */
+.project-metrics.metrics-center {
+    margin: 120px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    background: #fff;
+    border: 1px solid #f0e0a0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-size: 18px;
+    color: #333;
+    width: 90%;
+}
+
+.show-detail-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    background-color: #FADC61;
+    border: 2px solid #222;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.show-detail-btn::after {
+    content: "i";
+    font-size: 22px;
+    color: #222;
+    font-weight: bold;
+}
+
+.show-detail-btn:hover {
+    background-color: #ffe488;
 }
