@@ -1,6 +1,4 @@
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 :root{
   --yellow:#f4d468;
@@ -12,373 +10,246 @@ html {
   --radius:24px;
 }
 
-*{box-sizing:border-box}
-html,body,#root{height:100%}
-body{margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; color:var(--ink);}
+*{ box-sizing:border-box }
+html,body,#root{ height:100% }
+body{
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color:var(--ink);
+}
 
-.page{min-height:100%; display:flex; flex-direction:column}
+.page{ min-height:100%; display:flex; flex-direction:column }
 
 /* ================= NAV ================= */
+/* grid yerine flex: daha stabil ve responsive */
 .nav{
-  display:grid;
-  grid-template-columns: 1fr auto 1fr;
+  display:flex;
   align-items:center;
+  justify-content:space-between;
   gap:16px;
-  padding:18px 22px;
+  padding:18px clamp(16px, 3vw, 32px);
   background:var(--yellow);
 }
-.nav-left{ 
-  margin-left: -600px;
-  font-weight:800; 
-  font-size:26px; 
-  letter-spacing:.3px; 
+.nav-left{
+  /* negatif margin HACK'i kaldırıldı */
+  margin:0;
+  font-weight:800;
+  font-size:clamp(18px, 2vw, 26px);
+  letter-spacing:.3px;
 }
-
-.nav-center{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+.nav-center{
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+}
 .pill{
-  text-decoration:none; color:#222; font-weight:700; font-size:13px;
+  text-decoration:none; color:#222; font-weight:700;
+  font-size:clamp(12px, 1.2vw, 13px);
   background:var(--pill);
   padding:8px 12px; border-radius:999px;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
 }
 .pill:hover{ filter:brightness(0.98); }
-.nav-right{ display:flex; justify-content:flex-end; }
-.wallet{
-  height:36px; padding:0 14px; border-radius:999px;
-  border:none; background:#0f0f0f; color:#fff; font-weight:700;
-  box-shadow:var(--shadow); cursor:pointer;
-}
+.nav-right{ display:flex; justify-content:flex-end }
 
 /* ================= HERO ================= */
-.hero {
-  background: var(--yellow);
-  padding-left: 0px; 
-  padding-right: 0px;
+.hero{
+  background:var(--yellow);
+  padding: clamp(16px, 3vw, 28px) 0 clamp(40px, 6vw, 68px);
 }
-
 .hero-inner{
-  width: 100%;          /* max-width, margin:auto yok */
-  margin: 0;            /* ortalama yok */
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 40px; 
+  width:100%;
+  margin:0 auto;
+  max-width:1200px;                   /* geniş ekranlarda taşma yok */
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;         /* sağa kaçmayı engelle */
+  gap:clamp(16px, 4vw, 48px);
 }
 
 /* Sol: Logo + blazr tamamen sola yapışık */
-.hero-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* sola yapıştır */
-  justify-content: flex-start;
-  margin-left: 0;          /* boşluğu kaldır */
+.hero-brand{
+  display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;
+  margin-left:0;
 }
-
 .hero-logo{
-  padding-left: 0px;
-  width:400px; height:auto;
-  margin-bottom:-70px;               /* yazıya biraz yaklaştır */
+  padding-left:0;
+  width: clamp(140px, 18vw, 320px);   /* responsive */
+  height:auto;
+  margin-bottom: clamp(-24px, -2vw, -12px);
 }
-.brand-giant {
-  padding: 20px;
-  font-size: 500px;
-  line-height: 0.8;
-  font-weight: 900;
-  color: #2a2a2a;
-  opacity: 0.75;
-  user-select: none;
-  pointer-events: none;
+.brand-giant{
+  padding:0;
+  font-size: clamp(120px, 12vw, 320px);   /* 500px çok büyüktü */
+  line-height: .85;
+  font-weight:900;
+  color:#2a2a2a;
+  opacity:.25;
+  user-select:none; pointer-events:none;
 }
 
-/* Sağ: Çift kart düzeni */
-/* ==== STACK V2: iki kart, okla animasyonlu yer değiştirme ==== */
+/* Sağ: İKİ KART – animasyonlu yer değiştirme */
 .card-stack.v2{
-  position: relative;
-  width: 500px;
-  height: 580px;  
-  margin-bottom: 25PX;
-  margin-right:  200px;
+  position:relative;
+  width: clamp(280px, 32vw, 500px);
+  height: clamp(320px, 42vw, 580px);
+  margin: 0 clamp(8px, 2vw, 16px) clamp(8px, 3vw, 25px) 0; /* üst/sağ/alt/sol */
 }
 
 /* Ortak kart */
 .card-stack.v2 .card{
-  position: absolute; 
-  inset: 0;
-  border-radius: 22px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.15);
-  background: #f7f7f7;
-  padding: 14px 16px 10px;
-  display: flex;
-  flex-direction: column;
-  transition: transform .45s cubic-bezier(.22,.61,.36,1), 
-              box-shadow .2s ease, 
-              z-index .2s ease;
+  position:absolute; inset:0;
+  border-radius:22px;
+  box-shadow:0 10px 24px rgba(0,0,0,.15);
+  background:#f7f7f7;
+  padding: clamp(12px, 1.6vw, 18px) clamp(12px, 1.6vw, 16px) clamp(10px, 1.4vw, 14px);
+  display:flex; flex-direction:column;
+  transition: transform .45s cubic-bezier(.22,.61,.36,1),
+              box-shadow .2s ease, z-index .2s ease;
 }
 
 /* Başlangıç konumları (swap YOKKEN) */
 .card-stack.v2 .card-algo{
-  /* öndeki kart: biraz sola ve hafif eğik */
-  z-index: 2;
+  z-index:2;
   transform: translateX(-12px) rotate(-6deg);
 }
 .card-stack.v2 .card-blazr{
-  /* arkadaki kart: gri, dik, biraz sağa ve aşağı */
-  z-index: 1;
-  background: #e7dfc2;
+  z-index:1;
+  background:#e7dfc2;
   transform: translate(22px, 8px) rotate(0deg);
 }
 
 /* SWAP modu: konumları değiştir */
 .card-stack.v2.swap .card-algo{
-  z-index: 1;
+  z-index:1;
   transform: translate(22px, 8px) rotate(0deg);
 }
 .card-stack.v2.swap .card-blazr{
-  z-index: 2;
-  background: #f7f7f7;
+  z-index:2;
+  background:#f7f7f7;
   transform: translateX(-12px) rotate(-6deg);
 }
 
-/* Logo alanı */
+/* Logo alanı (kart içi kare kutu) */
 .thumb{
-  margin: auto;
-  margin-top: 10px;
-  width: 200PX;
-  height: 200px;
-  background: #ffffff;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0,0,0,.08);
-  margin-bottom: 10px;
+  margin: clamp(6px, 1vw, 10px) auto 10px;
+  width: clamp(160px, 40%, 260px);
+  height: clamp(160px, 40%, 260px);
+  background:#ffffff;
+  border-radius:18px;
+  display:flex; justify-content:center; align-items:center;
+  overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
-.thumb img{ width: 90%; height: auto; }
-.thumb-soft{ background: #fffdf6; }
+.thumb img{ max-width:90%; height:auto; display:block }
+.thumb-soft{ background:#fffdf6 }
 
 .card-title{
-  font-size: 30px;
-  letter-spacing: .08em;
-  margin: auto;
+  font-size: clamp(18px, 2vw, 30px);
+  letter-spacing:.08em;
+  margin: 0 auto 6px;
+  text-transform:lowercase;
+  font-weight:800;
 }
 .card-desc{
-  margin: auto;
-  font-size: 19px;
-  line-height: 1.6;
-  color: #4a4a4a;
+  margin: 0 auto clamp(8px, 1.6vw, 14px);
+  font-size: clamp(14px, 1.6vw, 19px);
+  line-height:1.6;
+  color:#4a4a4a;
+  text-align:center;
 }
 
 /* Oklar */
 .arrow-row{
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-top:auto;
+  display:flex; justify-content:space-between; align-items:center;
   padding: 6px 8px 8px;
 }
 .arrow-btn{
-  background: transparent;
-  border: none;
-  font-size: 48px;     /* kalın ve büyük */
-  font-weight: 900;
-  color: #111;
-  cursor: pointer;
-  line-height: 1;
+  background:transparent; border:none;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight:900; color:#111; cursor:pointer; line-height:1;
   transition: color .2s ease, transform .15s ease;
 }
-.arrow-btn:hover{
-  color: #222;         /* hover’da koyulaşır */
-  transform: scale(1.1);
-}
+.arrow-btn:hover{ color:#222; transform:scale(1.08) }
 
-/* (Opsiyonel) mobil ayarları */
-@media (max-width: 900px){
-  .card-stack.v2{ width: 280px; height: 320px; }
-}
-@media (max-width: 680px){
-  .card-stack.v2{ width: 260px; height: 300px; }
-}
-
-
-/* Kart içi */
-.card-logo{
-  width:84px; height:84px; border-radius:18px; background:#fff;
-  display:grid; place-items:center; font-size:34px; font-weight:900;
-  margin-bottom:12px; box-shadow:0 6px 16px rgba(0,0,0,.08);
-}
-.card-title{ font-size:20px; font-weight:800; margin-bottom:14px; letter-spacing:.08em; text-transform:lowercase; }
-.card-actions{ display:flex; gap:12px; }
-.card-arrows {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 20px;
-  margin-bottom: 2000px;
-}
-
-/* Ok butonları */
-.arrow-btn {
-  background: transparent;  /* 🔹 arka plan transparan */
-  border: none;             /* çerçeve yok */
-  font-size: 120px;          /* 🔹 ok işaretleri büyük */
-  font-weight: 900;         /* 🔹 daha kalın */
-  color: #111;              /* ok rengi (istersen değiştir) */
-  cursor: pointer;
-  line-height: 1;
-  transition: transform 0.2s ease;
-}
-
-.arrow-btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(0.95);
-}
-
-.arrow-btn:active {
-  transform: translateY(0);
-}
-
-/* İsteğe bağlı: sol ve sağ için farklı renk */
-.arrow-btn.left { color: #505050; }  
-.arrow-btn.right { color: #505050; } 
-
-/* ================= CONTENT ================= */
-.content {
-  background: #fff;
-  padding: 80px 22px;
-  display: grid;
+/* ================= CONTENT (how to) ================= */
+.content{
+  background:#fff;
+  padding: clamp(48px, 6vw, 80px) clamp(16px, 3vw, 22px);
+  display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: clamp(24px, 4vw, 40px);
+  align-items:center;
+  max-width:1200px;
+  margin:0 auto;
 }
 
 /* Sol sütun */
-.content-left h2 { 
-  font-size: 52px;       /* 🔹 36px’ten büyüttüm */
-  font-weight: 800;
-  margin-bottom: 20px;
-  line-height: 1.2;      /* 🔹 daha rahat okunabilir */
+.content-left h1,
+.content-left h2{
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight:900;
+  margin:0 0 clamp(12px, 2vw, 24px);
+  line-height:1.15;
+  text-align:left;
 }
-
-
 .content-left p{
-  font-size: 16px;
-  line-height: 1.6;
-  color: #444;
-  margin: 0 0 24px;
-  max-width: 520px;
+  font-size: clamp(14px, 1.6vw, 18px);
+  line-height:1.6; color:#444;
+  margin:0 0 24px; max-width: 52ch; text-align:left;
 }
 .docs-btn{
-  padding: 15px 35px;
-  border: none;
-  border-radius: 10px;
-  background: #111;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
+  padding: 12px 24px; border:none; border-radius:10px;
+  background:#111; color:#fff; font-weight:700; cursor:pointer;
 }
 
 /* Sağ sütun: stacked kartlar */
 .howto-cards{
-  position: relative;
-  width: 320px;
-  height: 360px;
+  position:relative;
+  width: clamp(260px, 32vw, 360px);
+  height: clamp(260px, 36vw, 360px);
   margin: 0 auto;
 }
-
-/* ortak kart stili */
 .hc{
-  
-  position: absolute;
-  inset: 0;
-  border-radius: 24px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  position:absolute; inset:0; border-radius:24px; box-shadow:0 10px 24px rgba(0,0,0,.12);
+  display:flex; justify-content:center; align-items:center;
 }
+.hc-top{ background:#fbf7e6; z-index:3; padding: clamp(12px, 2vw, 18px) }
+.hc-mid{ background:#cfcfcf; z-index:2; transform: translateX(22px) translateY(12px) }
+.hc-back{ background:#9e9e9e; z-index:1; transform: translateX(44px) translateY(24px) }
 
-/* öndeki kart (açık sarı) */
-.hc-top{
-  background: #fbf7e6;
-  z-index: 3;
-  padding: 18px;
-}
-
-/* ortadaki kart (açık gri) */
-.hc-mid{
-  background: #cfcfcf;
-  z-index: 2;
-  transform: translateX(22px) translateY(12px);
-  border-radius: 24px;
-}
-
-/* arkadaki kart (koyu gri) */
-.hc-back{
-  background: #9e9e9e;
-  z-index: 1;
-  transform: translateX(44px) translateY(24px);
-  border-radius: 24px;
-}
-
-/* içteki beyaz, yuvarlatılmış görsel alanı */
+/* beyaz kare ve logo ortalama */
 .hc-thumb{
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  border-radius: 18px;
-  display: flex;                /* 🔹 flex ile ortalama */
-  justify-content: center;      /* yatay ortalama */
-  align-items: center;          /* dikey ortalama */
-  overflow: hidden;
+  width: clamp(140px, 50%, 200px);
+  height: clamp(140px, 50%, 200px);
+  background:#fff; border-radius:18px;
+  display:flex; justify-content:center; align-items:center; overflow:hidden;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
 }
+.hc-thumb img{ max-width:80%; max-height:80%; object-fit:contain }
 
-.hc-thumb img{
-  max-width: 70%;               /* 🔹 kutu içinde dengeli */
-  max-height: 70%;
-  object-fit: contain;          /* 🔹 logo kırpılmadan ortalanır */
-}
-
-/* dikey sarı etiketler (defi / gamefi / meme) */
+/* etiketler (ince ve okunabilir) */
 .hc-tag{
-  position: absolute;
-  right: -14px;
-  top: 24px;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  background: #f4d468;
-  color: #1a1a1a;
-  font-weight: 600;       /* 🔹 800 → 600 (daha ince) */
-  font-size: 15px;        /* 🔹 13px → 11px */
-  letter-spacing: 0.5px;  /* 🔹 okunabilirlik için hafif aralık */
-  padding: 8px 4px;       /* 🔹 daha dar padding */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+  position:absolute; right:-14px; top:24px;
+  writing-mode:vertical-rl; text-orientation:mixed;
+  background:#f4d468; color:#1a1a1a;
+  font-weight:600; font-size:11px; letter-spacing:.5px;
+  padding:8px 4px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,.1);
 }
 
-
-/* Scroll hissi için boşluk bölümleri (mevcuttu) */
-.spacer{ height:60vh; background:#fff; }
-
-/* Responsive */
-@media (max-width: 900px){
-  .content{ grid-template-columns: 1fr; }
-  .howto-cards{ margin-top: 12px; }
-}
-  
+/* boşluk */
+.spacer{ height:60vh; background:#fff }
 
 /* ================= Responsive ================= */
-@media (max-width: 1080px){
-  .brand-giant{ font-size:150px; }
-  .hero-logo{ width:180px; }
+@media (max-width: 1024px){
+  .brand-giant{ opacity:.22 }
 }
 @media (max-width: 900px){
-  .hero-inner{ flex-direction:column; align-items:flex-start; }
-  .card-stack{ width:340px; height:260px; }
+  .hero-inner{ flex-direction:column; align-items:flex-start }
+  .card-stack.v2{ width: clamp(260px, 60vw, 360px); height: clamp(300px, 70vw, 420px) }
+  .content{ grid-template-columns:1fr }
+  .howto-cards{ margin-top:12px }
 }
-@media (max-width: 680px){
-  .brand-giant{ font-size:110px; }
-  .hero-logo{ width:150px; }
-  .content{ grid-template-columns:1fr; }
+@media (max-width: 600px){
+  .nav{ padding:14px 16px }
+  .nav-center{ gap:8px }
 }
-
-
-
