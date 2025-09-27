@@ -63,17 +63,17 @@ body{
 
 /* Sol blok: logo + giant */
 .hero-brand {
+  flex: 0 0 70%px;        /* 🔹 genişliğin %70’i */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;   /* sola yapıştır */
+  align-items: flex-start;
   justify-content: flex-start;
-  margin: 0;
 }
 
 .hero-logo {
-  width: 470px;              /* sabit ama responsive olabilir */
+  width: 30%;           /* giant üstündeki logo */
   height: auto;
-  margin: 0 0 -100px 0;       /* giant’a yaklaştır */
+  margin: 0 0 -4% 0;    /* giant’a yaklaş */
 }
 
 .brand-giant {
@@ -90,10 +90,11 @@ body{
 
 /* Kartlar giant’ın hemen sağında */
 .card-stack.v2 {
+  flex: 0 0 20%;          /* 🔹 hero-inner’ın %20’sini kaplar */
+  max-width: 400px;       /* istersen sınır koyabilirsin */
+  aspect-ratio: 5 / 7;    /* oran sabit kalır */
   position: relative;
-  width: 400px;
-  height: 520px;
-  margin: 50px;                 /* sağ/sol boşluk olmasın */
+  margin-left: 50px;      /* sağa yapış */
 }
 
 /* Ortak kart */
