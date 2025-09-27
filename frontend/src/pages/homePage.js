@@ -86,7 +86,7 @@ const HomePage = () => {
       </section>
 
       {/* Alt içerik (aynı) */}
-      <section id="howto" className="content howto">
+      <section id="howto" className="content">
         <div className="content-left">
           <h1>Fast Swipes, Smart Gains.</h1>
           <p>
