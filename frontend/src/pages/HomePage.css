@@ -6,46 +6,75 @@
   --shadow:0 12px 32px rgba(0,0,0,.18), 0 6px 14px rgba(0,0,0,.10);
 
   /* Sabit tasarım ölçüleri */
-  --page-w: 1400px;   /* tüm ana satır genişliği */
-  --hero-brand-w: 900px;  /* sol blok (logo + blazr) */
+  --page-w: 1400px;     /* tüm ana satır genişliği */
+  --hero-brand-w: 900px;/* sol blok (logo + blazr) */
   --logo-w: 400px;
   --giant-size: 500px;
-  --card-w: 420px;    /* sağ kart alanı */
+  --card-w: 420px;      /* sağ kart alanı */
   --card-h: 520px;
+
+  /* Yeni: hero kolonları arasındaki sabit boşluk */
+  --hero-gap: 40px;     /* 900 + 40 + 420 = 1360px  -> 1400 içine sabit sığar */
 }
 
-/* GENEL (sabit yerleşim) */
+html { scroll-behavior: smooth; }
 *{ box-sizing:border-box }
 html,body,#root{ height:100% }
 body{
   margin:0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
   color:var(--ink);
-  /* Sabit genişlik görünümü için min-width;
-     ekran daralırsa yatay scroll oluşur, oranlar bozulmaz. */
+  /* Sabit genişlik görünümü: küçük ekranlarda yatay scroll bilerek var */
   min-width: var(--page-w);
 }
 
-/* ================= NAV ================= */
+/* ================= NAV ================= */ 
 .nav{
-  width: 100%;
-  display:flex; align-items:center; justify-content:center;
-  background:var(--yellow);
-}
-.nav > *{
-  width: var(--page-w);
-  display:flex; align-items:center; justify-content:space-between;
-  gap:16px; padding:18px 22px;
-}
-.nav-left{ font-weight:800; font-size:26px; letter-spacing:.3px; margin:0 }
-.nav-center{ display:flex; gap:10px; justify-content:center; flex-wrap:nowrap }
-.pill{
-  text-decoration:none; color:#222; font-weight:700; font-size:13px;
-  background:var(--pill); padding:8px 12px; border-radius:999px;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
-  white-space:nowrap;
-}
-.nav-right{ display:flex; justify-content:flex-end }
+  height: 70px;
+   width: 100%; 
+   display:flex; 
+   align-items:center; 
+   justify-content:center; 
+   background:var(--yellow); 
+  }
+
+  .nav > *{ 
+    width: var(--page-w); 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    gap:16px; padding:18px 22px; 
+  } 
+  
+  .nav-left{
+     font-weight:800; 
+     font-size:26px; 
+     letter-spacing:.3px; 
+     margin:0 
+    }
+    
+    .nav-center{ 
+      display:flex; 
+      gap:10px; 
+      justify-content:center; 
+      flex-wrap:nowrap 
+    } 
+    
+    .pill{ 
+      text-decoration:none; 
+      color:#222; 
+      font-weight:700; 
+      font-size:13px; 
+      background:var(--pill); 
+      padding:8px 12px; 
+      border-radius:999px; 
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); 
+      white-space:nowrap;
+     } 
+     
+     .nav-right{ 
+      display:flex; 
+      justify-content:flex-end }
 
 /* ================= HERO ================= */
 .hero{
@@ -54,48 +83,54 @@ body{
   display:flex; justify-content:center;
   padding: 0 0 56px 0;
 }
+
+/* ÖNEMLİ DEĞİŞİKLİK: Flex yerine grid ile sabit iki kolon */
 .hero-inner {
-  width: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;   /* sola hizala */
-  gap: var(--logo-w);                        /* kartlarla giant arası boşluğu sen kontrol edeceksin */
+  width: var(--page-w);           /* sayfa genişliğine sabitlenir */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: var(--hero-brand-w) var(--card-w);
+  column-gap: var(--hero-gap);
+  align-items: end;               /* alt hizalama, önceki görünümü korur */
 }
 
-/* Sol: logo + blazr (tamamen sabit) */
+/* Sol blok: logo + dev yazı */
 .hero-brand{
-  width: var(--hero-brand-w);
+  width: 100%;                    /* grid kolonu kadar */
   display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;
 }
 .hero-logo{
   width: var(--logo-w); height:auto;
   margin: 0 0 -80px 0; display:block;
 }
+
+/* Dev yazı: genişliğe göre sınırlı, taşma yok */
 .brand-giant{
-  font-size: 400px;
+  /* Maks 500px, ama kolon genişliğinin ~%45'ini geçmesin */
+  font-size: clamp(300px, calc(var(--hero-brand-w) * 0.45), var(--giant-size));
   line-height:.88; font-weight:900;
   color:#3a372b; opacity:.78;
-  margin:0; padding:0; white-space:nowrap;
-  user-select:none; pointer-events:none;
-  text-align: left;
+  margin:0; padding:0; white-space:nowrap;   /* tek satırda kalsın */
+  overflow:hidden; text-overflow:ellipsis;   /* aşırı durumlara karşı */
+  user-select:none; pointer-events:none; text-align:left;
 }
 
-/* Sağ: kart alanı (sabit px + oran bozulmaz) */
+/* Sağ: kart alanı – grid kolonuna sabit */
 .card-stack.v2{
-  flex: 0 0 var(--card-w);        /* 420px sabit */
   width: var(--card-w);
   min-width: var(--card-w);
   height: var(--card-h);
-  margin: 0 0 0 40px;             /* gerekirse ekstra boşluk */
+  margin: 0;                      /* grid ile ekstra margin gerekmiyor */
   position: relative;
-
-  /* Safari kırpılma/ince çizgi düzeltmeleri */
   transform: translateZ(0);
   will-change: transform;
-  
+
+  /* İsteğin doğrultusunda: sağ kenara yapıştır, sağda 20px nefes */
+  justify-self: end;
+  margin-right: -20px;
 }
 
-/* Kartlar */
+/* Kartlar – olduğu gibi */
 .card-stack.v2 .card{
   position:absolute; inset:0;
   border-radius:24px; background:#f7f7f7;
@@ -110,58 +145,302 @@ body{
 .card-stack.v2.swap .card-algo{ z-index:1; transform: translate(22px,8px) rotate(0deg) }
 .card-stack.v2.swap .card-blazr{ z-index:2; background:#f7f7f7; transform: translateX(-12px) rotate(-6deg) }
 
-/* Kart içi görsel alanı (sabit) */
-.thumb{
-  width: 200px; height:200px;
-  background:#fff; border-radius:18px;
-  display:grid; place-items:center; overflow:hidden;
-  box-shadow:0 6px 16px rgba(0,0,0,.10);
-  margin: 10px 0 12px;
-}
+/* Kart içi görsel alanı – aynı */
+.thumb{ width:200px; height:200px; background:#fff; border-radius:18px; display:grid; place-items:center; overflow:hidden; box-shadow:0 6px 16px rgba(0,0,0,.10); margin:10px 0 12px }
 .thumb img{ width:90%; height:auto; display:block }
 .thumb-soft{ background:#fffdf6 }
 
-/* Kart metinleri (sabit) */
-.card-title{
-  font-size: 30px; font-weight:900; letter-spacing:.02em;
-  margin: 6px 0 6px; text-transform:lowercase; text-align:center;
-}
-.card-desc{
-  font-size: 19px; line-height:1.55; color:#4a4a4a; text-align:center;
-  margin: 0 0 10px; max-width: 85%;
-}
+.card-title{ font-size:30px; font-weight:900; letter-spacing:.02em; margin:6px 0 6px; text-transform:lowercase; text-align:center; }
+.card-desc{ font-size:19px; line-height:1.55; color:#4a4a4a; text-align:center; margin:0 0 10px; max-width:85% }
 
-/* Oklar */
 .arrow-row{ margin-top:auto; width:100%; display:flex; justify-content:space-between; align-items:center }
 .arrow-btn{ background:transparent; border:none; font-size:48px; line-height:1; cursor:pointer }
 .arrow-btn:hover{ transform:scale(1.08) }
 
-/* ================= CONTENT (istersen sabit bırak) ================= */
-.content{
-  width: 100%;
-  display:flex; justify-content:center;
-  background:#fff;
-  padding: 80px 0;
-}
+/* ================= CONTENT (istersen sabit bırak) ================= */ 
+.content{ 
+  width: 100%; 
+  display:flex; 
+  justify-content:center; 
+  background:#fff; 
+  padding: 80px 0; 
+} 
+
 .content > .content-inner{
-  width: 1200px;               /* sabit içerik genişliği */
-  display:grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items:center;
-}
-.content-left h2{ font-size:52px; font-weight:800; margin:0 0 20px; line-height:1.2 }
-.content-left p{ font-size:16px; line-height:1.6; color:#444; margin:0 0 24px; max-width:520px }
-.docs-btn{ padding:15px 35px; border:none; border-radius:10px; background:#111; color:#fff; font-weight:700; cursor:pointer }
-
-.howto-cards{ position:relative; width:320px; height:360px; margin:0 auto }
-.hc{ position:absolute; inset:0; border-radius:24px; box-shadow:0 10px 24px rgba(0,0,0,.12) }
-.hc-top{ background:#fbf7e6; z-index:3; padding:18px }
-.hc-mid{ background:#cfcfcf; z-index:2; transform: translateX(22px) translateY(12px) }
-.hc-back{ background:#9e9e9e; z-index:1; transform: translateX(44px) translateY(24px) }
-.hc-thumb{ width:100%; height:100%; background:#fff; border-radius:18px; display:flex; justify-content:center; align-items:center; overflow:hidden }
-.hc-thumb img{ max-width:70%; max-height:70%; object-fit:contain }
-.hc-tag{
-  position:absolute; right:-14px; top:24px; writing-mode:vertical-rl; text-orientation:mixed;
-  background:#f4d468; color:#1a1a1a; font-weight:600; font-size:11px; letter-spacing:.5px;
-  padding:8px 4px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,.1);
+  display: grid !important;             /* flex'e dönmesini engelle */
+  grid-template-columns: 1fr 1fr;
+  column-gap: 120px;                    /* sadece yatay boşluğu büyüt */
+  row-gap: 40px;                        /* dikey boşluğu sabit tut (opsiyonel) */
+  align-items: start;
 }
 
-/* Responsive KURALLAR YOK — her şey sabit! */
+
+/* Sol blok: daha sol hizalı ve geniş tipografi */
+.content-left {
+  
+  margin-left: 0;         /* grid alanında sola yapış */
+  text-align: left;            /* başlık ve paragraf sola yaslı */
+  padding-left: 60px;
+}
+
+.content-left h1 {
+  font-size: 62px;             /* önce 52 idi, biraz büyüttüm */
+  font-weight: 900;
+  margin: 0 0 28px;
+  line-height: 1.15;
+  max-width: 700px;            /* çok geniş ekranlarda satır çok açılmasın */
+}
+
+.content-left p {
+  font-size: 28px;             /* 16 → 18 */
+  line-height: 1.7;
+  color: #333;
+  margin: 0 0 32px;
+  max-width: 600px;            /* metin satır uzunluğu okunaklı kalır */
+  text-align: justify;         /* isteğe bağlı: iki yana yasla */
+}
+      
+      .docs-btn{ 
+        padding:15px 35px; 
+        border:none; 
+        border-radius:10px; 
+        background:#111; 
+        color:#fff; 
+        font-weight:700; 
+        cursor:pointer } 
+        
+        .howto-cards{ 
+          position:relative;
+          width:400px; 
+          height:430px; 
+          margin:0 } 
+          
+          .hc{ 
+            position:absolute; 
+            inset:0; 
+            border-radius:24px; 
+            box-shadow:0 10px 24px rgba(0,0,0,.12) 
+          } 
+          
+          .hc-top{ 
+            background:#fbf7e6; 
+            z-index:3; 
+            padding:18px 
+          } 
+          
+          .hc-mid{ 
+            background:#cfcfcf; 
+            z-index:2; 
+            transform: translateX(22px) translateY(12px) 
+          } 
+          
+          .hc-back{ 
+            background:#9e9e9e; 
+            z-index:1; 
+            transform: translateX(44px) translateY(24px) } 
+            
+            .hc-thumb{ 
+              width:100%; 
+              height:100%; 
+              background:#fff; 
+              border-radius:18px; 
+              display:flex; 
+              justify-content:center; 
+              align-items:center; 
+              overflow:hidden } 
+              
+              .hc-thumb img{ 
+                max-width:70%; 
+                max-height:70%; 
+                object-fit:contain } 
+                
+                .hc-tag{ 
+                  position:absolute; 
+                  right:-14px; top:24px; 
+                  writing-mode:vertical-rl; 
+                  text-orientation:mixed; 
+                  background:#f4d468; 
+                  color:#1a1a1a; 
+                  font-weight:600; 
+                  font-size:11px; 
+                  letter-spacing:.5px; 
+                  padding:8px 4px; 
+                  border-radius:10px; 
+                  box-shadow:0 4px 10px rgba(0,0,0,.1); } /* Responsive KURALLAR YOK — her şey sabit! */
+
+
+
+
+/* ===== Sadece alt kartlar (scoped) ===== */
+.content.content--cards {
+  --icard-w: 480px;     /* yalnız bu bölümde geçerli */
+  --icard-gap: 90px;
+  --icard-thumb-h: 250px;
+
+  width: 100%;
+  background: #fff;
+  padding: 80px 0;
+  display: flex;
+  justify-content: center; /* bölüm ortada */
+}
+
+.content.content--cards .cards-inner {
+  display: flex;
+  gap: var(--icard-gap);
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;          /* iki kart yan yana */
+}
+
+.content.content--cards .info-card {
+  width: var(--icard-w);
+  background: #fff5d1;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform .18s ease, box-shadow .2s ease;
+}
+
+.content.content--cards .info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.12);
+}
+
+/* Üstte resim */
+.content.content--cards .info-card-thumb {
+  width: 100%;
+  height: var(--icard-thumb-h);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.content.content--cards .info-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Başlık ve paragraf */
+.content.content--cards .info-card-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 12px;
+  color: #111;
+}
+
+.content.content--cards .info-card-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  margin: 0;
+}
+
+
+
+
+/* ===== Footer ===== */
+.footer {
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,.1);
+  padding: 60px 0 30px;
+  font-family: Inter, sans-serif;
+}
+
+.footer-inner {
+  width: var(--page-w);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+.footer-logo {
+  font-size: 54px;
+  font-weight: 900;
+  color: #111;
+}
+
+.footer-links {
+  display: flex;
+  gap: 60px;
+}
+
+.footer-col h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: #111;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color .2s ease;
+}
+.footer-col a:hover {
+  color: #f4d468; /* Bumble sarısı */
+}
+
+/* Alt satır */
+.footer-bottom {
+  width: var(--page-w);
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(0,0,0,.08);
+  padding-top: 20px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+}
+.footer-social a {
+  font-size: 18px;
+  color: #222;
+  transition: color .2s ease;
+}
+.footer-social a:hover { color: #f4d468; }
+
+.footer-actions {
+  display: flex;
+  gap: 12px;
+}
+.sign-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+.sign-btn {
+  border-color: #111;
+}
+.sign-btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+                  

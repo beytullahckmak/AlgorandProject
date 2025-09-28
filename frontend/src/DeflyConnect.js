@@ -52,18 +52,15 @@ const DeflyConnect = () => {
             {accountAddress ? (
                 <div className="defly-connected-box">
                     <p className="defly-address">
-                        Bağlı Defly Hesabı: <b>{accountAddress}</b>
+                        linked account: <b>{accountAddress}</b>
                     </p>
                     <button className="defly-disconnect-btn" onClick={handleDisconnectWalletClick}>
-                        Bağlantıyı Kes
+                        Disconnect
                     </button>
                 </div>
             ) : (
-                <button className='wallet' onClick={handleConnectWalletClick}>Defly Connect</button>
+                <button className='wallet' onClick={handleConnectWalletClick}>Defly Wallet Connect</button>
             )}
-            <p style={{ fontSize: 12, color: "#888", marginTop: 8 }}>
-                Defly mobil cüzdanınız ile QR kodu okutarak bağlanabilirsiniz.
-            </p>
         </div>
     );
 };
