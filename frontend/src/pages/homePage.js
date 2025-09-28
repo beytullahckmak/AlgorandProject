@@ -187,6 +187,14 @@ const HomePage = () => {
                   <a href="#">Terms and conditions</a>
                   <a href="#">Accessibility</a>
                 </div>
+
+                <div className="footer-col">
+                  <h4>social</h4>
+                  <a href="#">linkedin</a>
+                  <a href="#">instagram</a>
+                  <a href="#">github</a>
+                  <a href="#">youtube</a>
+                </div>
               </div>
             </div>
 

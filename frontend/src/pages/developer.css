@@ -1,0 +1,111 @@
+.devpage{
+  --yellow:#f4d468;
+  --ink:#111;
+  --panel:#cfcfcf;
+
+  width:100%;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns: 340px 1px 1fr;
+  background:#fff;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--ink);
+}
+
+/* Sidebar */
+.devpage-sidebar{
+  padding:24px 18px;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.devpage-wallet{
+  background: var(--yellow);
+  border-radius:16px;
+  display:flex; align-items:center; gap:12px;
+  padding:10px 14px;
+  width: 270px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.10);
+}
+.devpage-wallet-avatar{
+  width:56px; height:56px; border-radius:50%; background:#999;
+}
+.devpage-wallet-text{ font-weight:800; letter-spacing:.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.devpage-mascot{ width:38px; height:38px; border-radius:10px; background:#ff5b5b; align-self:flex-start; margin:8px; }
+
+.devpage-divider{ width:1px; background:#dedede; }
+
+/* Sağ alan */
+.devpage-main{
+  position:relative;
+  padding: 20px 34px 60px;
+}
+
+/* Logo */
+.devpage-logo{
+  width:100%;
+  display:flex; align-items:flex-start; justify-content:center; gap:10px;
+  margin-top: 6px;
+}
+.devpage-logo-icon{ width:36px; height:36px; border-radius:8px; background:#ff5b5b; }
+.devpage-logo-title{ font-size:42px; font-weight:900; line-height:1; letter-spacing:.2px; }
+.devpage-logo-sub{ display:block; margin-left:6px; margin-top:2px; font-weight:700; }
+
+/* Upload kutusu */
+.devpage-upload{
+  position:absolute; right:58px; top:70px;
+  width:150px; height:120px;
+  background:#fff; border-radius:22px;
+  border:3px solid #e74c3c;
+  display:grid; place-items:center;
+  box-shadow: 0 10px 28px rgba(0,0,0,.14);
+}
+.devpage-upload-icon{
+  width:42px; height:48px; border-radius:8px; background:#111;
+}
+
+/* Profil */
+.devpage-profile{
+  display:flex; align-items:center; gap:18px;
+  margin: 28px 0 10px 0;
+}
+.devpage-profile-avatar{
+  width:140px; height:140px; border-radius:50%; background:#777;
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+.devpage-username{ font-size:18px; font-weight:600; }
+
+/* Kart */
+.devpage-card{
+  position: relative;
+  width: 860px;
+  background: #cfcfcf;
+  border-radius: 30px;
+  padding: 48px 28px 36px;
+  box-shadow: 0 22px 60px rgba(0,0,0,.22);
+}
+
+/* Alanlar */
+.devpage-field{
+  background:#fff; border-radius:10px;
+  min-height:68px;
+  display:flex; align-items:center; gap:14px;
+  padding: 12px 14px;
+  margin-bottom: 22px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.08);
+}
+.devpage-field--with-actions{ position:relative; padding-right: 140px; }
+.devpage-field--empty{ height:78px; }
+
+.devpage-thumb{ width:46px; height:46px; border-radius:6px; background:#d9d9d9; }
+.devpage-input{ border:none; outline:none; background:transparent; flex:1 1 auto; font-size:18px; color:#111; }
+
+.devpage-actions{
+  position:absolute; right:18px; top:50%; transform:translateY(-50%);
+  display:flex; align-items:center; gap:26px; color:#111; font-weight:700;
+}
+.devpage-ico{ margin-left:6px; }
+
+@media (max-width: 1240px){
+  .devpage{ grid-template-columns: 300px 1px 1fr; }
+  .devpage-card{ width:100%; }
+  .devpage-upload{ right:24px; }
+}
