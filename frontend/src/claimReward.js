@@ -1,5 +1,5 @@
 import algosdk from "algosdk";
-import { deflyWallet } from "./DeflyConnect"; // cüzdan bağlama componentin
+import deflyWallet  from "./DeflyConnect"; // cüzdan bağlama componentin
 
 // Contract bilgileri
 const APP_ID = 1002; // senin smart contract ID

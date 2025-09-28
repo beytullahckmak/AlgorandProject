@@ -5,7 +5,8 @@ import LogoInvest from '../assets/blazr_ınvest.svg';
 import Proje1 from '../assets/ornekprojelogosvg.svg';
 import { investToProject } from '../investToProject';
 import { claimReward } from '../claimReward';
-import { deflyWallet } from '../DeflyConnect'; // Cüzdan bağlantısı
+import deflyWallet  from '../DeflyConnect.js'; // Cüzdan bağlantısı
+
 
 const Investor = () => {
     const [currentProject, setCurrentProject] = useState(0);
