@@ -1,0 +1,10 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 1.6.3
+_src_path: gh:algorandfoundation/algokit-python-template
+author_email: beytul.1907_fb@icloud.com
+author_name: Beytullah
+contract_name: hello_world
+deployment_language: python
+preset_name: starter
+project_name: AlgorandSmartContract-contracts
+

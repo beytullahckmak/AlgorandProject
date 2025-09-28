@@ -148,35 +148,29 @@ const Investor = () => {
         }
     };
 
-    const onConfirmInvestment = async () => {
-        if (!accountAddress) {
-            alert("Cüzdan bağlı değil!");
+    const onConfirmInvestment = () => {
+        if (!selectedAmount || selectedAmount === '') {
+            alert('Lütfen bir miktar seçin.');
             return;
         }
-        if (selectedAmount && selectedAmount !== '') {
-            try {
-                await investToProject(accountAddress, selectedAmount);
-
-                const likedProject = projects[currentProject];
-                const existingIndex = investedProjects.findIndex(p => p.id === likedProject.id);
-                let updatedInvestedProjects;
-                if (existingIndex === -1) {
-                    updatedInvestedProjects = [...investedProjects, { ...likedProject, amount: selectedAmount }];
-                } else {
-                    updatedInvestedProjects = [...investedProjects];
-                    updatedInvestedProjects[existingIndex].amount = selectedAmount;
-                }
-                setInvestedProjects(updatedInvestedProjects);
-                localStorage.setItem('investedProjects', JSON.stringify(updatedInvestedProjects));
-                setInvestmentDone(true);
-                setShowInvestmentOptions(false);
-                setTimeout(() => setInvestmentDone(false), 2500);
-            } catch (err) {
-                alert("Blockchain yatırım hatası: " + err.message);
-            }
+    
+        const likedProject = projects[currentProject];
+        const existingIndex = investedProjects.findIndex(p => p.id === likedProject.id);
+    
+        let updatedInvestedProjects;
+        if (existingIndex === -1) {
+            updatedInvestedProjects = [...investedProjects, { ...likedProject, amount: selectedAmount }];
         } else {
-            alert('Lütfen bir yatırım miktarı seçin veya girin.');
+            updatedInvestedProjects = [...investedProjects];
+            updatedInvestedProjects[existingIndex].amount = selectedAmount;
         }
+    
+        setInvestedProjects(updatedInvestedProjects);
+        localStorage.setItem('investedProjects', JSON.stringify(updatedInvestedProjects));
+    
+        setInvestmentDone(true);
+        setShowInvestmentOptions(false);
+        setTimeout(() => setInvestmentDone(false), 2500);
     };
     const onClaim = async () => {
         if (!accountAddress) {
