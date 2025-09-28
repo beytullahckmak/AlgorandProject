@@ -82,10 +82,17 @@ body{
 
 /* Sağ: kart alanı (sabit px + oran bozulmaz) */
 .card-stack.v2{
-  position: relative;
+  flex: 0 0 var(--card-w);        /* 420px sabit */
   width: var(--card-w);
+  min-width: var(--card-w);
   height: var(--card-h);
-  margin: 0;
+  margin: 0 0 0 40px;             /* gerekirse ekstra boşluk */
+  position: relative;
+
+  /* Safari kırpılma/ince çizgi düzeltmeleri */
+  transform: translateZ(0);
+  will-change: transform;
+  
 }
 
 /* Kartlar */
