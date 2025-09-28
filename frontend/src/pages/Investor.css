@@ -677,3 +677,18 @@
 .show-detail-btn:hover {
     background-color: #ffe488;
 }
+.claim-button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease;
+  }
+  
+  .claim-button:hover {
+    background: #45a049;
+  }

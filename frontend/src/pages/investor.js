@@ -3,6 +3,9 @@ import './Investor.css';
 import BlazrLogo from '../assets/blazarsvg.svg';
 import LogoInvest from '../assets/blazr_ınvest.svg';
 import Proje1 from '../assets/ornekprojelogosvg.svg';
+import { investToProject } from '../investToProject';
+import { claimReward } from '../claimReward';
+import { deflyWallet } from '../DeflyConnect'; // Cüzdan bağlantısı
 
 const Investor = () => {
     const [currentProject, setCurrentProject] = useState(0);
@@ -11,11 +14,28 @@ const Investor = () => {
     const [selectedAmount, setSelectedAmount] = useState(null);
     const [investmentDone, setInvestmentDone] = useState(false);
     const [investmentLike, setInvestmentLike] = useState(false);
-    const [isDetailMode, setIsDetailMode] = useState(false); // detay modu kontrolü
+    const [isDetailMode, setIsDetailMode] = useState(false); // detay modu kontrolü 
+    const [accountAddress, setAccountAddress] = useState(null); // Cüzdan adresi
+
 
     const detailsRef = useRef(null);
 
     const userAddress = "0xAlg0rh4ca7moN";
+
+    useEffect(() => {
+        const connectWallet = async () => {
+            try {
+                const accounts = await deflyWallet.connect(); // DeflyWallet bağlantısı
+                if (accounts && accounts.length > 0) {
+                    setAccountAddress(accounts[0]);
+                }
+            } catch (err) {
+                console.error("Cüzdan bağlama hatası:", err);
+            }
+        };
+        connectWallet();
+    }, []);
+
 
     const projects = [
         {
@@ -90,11 +110,11 @@ const Investor = () => {
         }
     ];
 
+
     useEffect(() => {
         const stored = JSON.parse(localStorage.getItem('investedProjects')) || [];
         setInvestedProjects(stored);
     }, []);
-
 
     const clearInvestedProjects = () => {
         setInvestedProjects([]);
@@ -127,24 +147,45 @@ const Investor = () => {
         }
     };
 
-    const onConfirmInvestment = () => {
+    const onConfirmInvestment = async () => {
+        if (!accountAddress) {
+            alert("Cüzdan bağlı değil!");
+            return;
+        }
         if (selectedAmount && selectedAmount !== '') {
-            const likedProject = projects[currentProject];
-            const existingIndex = investedProjects.findIndex(p => p.id === likedProject.id);
-            let updatedInvestedProjects;
-            if (existingIndex === -1) {
-                updatedInvestedProjects = [...investedProjects, { ...likedProject, amount: selectedAmount }];
-            } else {
-                updatedInvestedProjects = [...investedProjects];
-                updatedInvestedProjects[existingIndex].amount = selectedAmount;
+            try {
+                await investToProject(accountAddress, selectedAmount);
+
+                const likedProject = projects[currentProject];
+                const existingIndex = investedProjects.findIndex(p => p.id === likedProject.id);
+                let updatedInvestedProjects;
+                if (existingIndex === -1) {
+                    updatedInvestedProjects = [...investedProjects, { ...likedProject, amount: selectedAmount }];
+                } else {
+                    updatedInvestedProjects = [...investedProjects];
+                    updatedInvestedProjects[existingIndex].amount = selectedAmount;
+                }
+                setInvestedProjects(updatedInvestedProjects);
+                localStorage.setItem('investedProjects', JSON.stringify(updatedInvestedProjects));
+                setInvestmentDone(true);
+                setShowInvestmentOptions(false);
+                setTimeout(() => setInvestmentDone(false), 2500);
+            } catch (err) {
+                alert("Blockchain yatırım hatası: " + err.message);
             }
-            setInvestedProjects(updatedInvestedProjects);
-            localStorage.setItem('investedProjects', JSON.stringify(updatedInvestedProjects));
-            setInvestmentDone(true);
-            setShowInvestmentOptions(false);
-            setTimeout(() => setInvestmentDone(false), 2500);
         } else {
             alert('Lütfen bir yatırım miktarı seçin veya girin.');
+        }
+    };
+    const onClaim = async () => {
+        if (!accountAddress) {
+            alert("Cüzdan bağlı değil!");
+            return;
+        }
+        try {
+            await claimReward(accountAddress);
+        } catch (err) {
+            alert("Claim sırasında hata: " + err.message);
         }
     };
 
@@ -209,6 +250,14 @@ const Investor = () => {
                 <div className="liked-projects">
                     <h3>Yatırım Yapılanlar</h3>
                     <button className="clear-liked" onClick={clearInvestedProjects}>Yatırımları Temizle</button>
+                    {accountAddress && (
+                        <button
+                            className="claim-button"
+                            onClick={onClaim}
+                        >
+                            Claim Rewards
+                        </button>
+                    )}
                 </div>
                 <div className="sidebar-bottom-logo">
                     <img alt="blazr logo" src={BlazrLogo} style={{ width: '150px' }} />
